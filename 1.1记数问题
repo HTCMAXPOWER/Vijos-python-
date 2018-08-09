@@ -1,0 +1,22 @@
+#include <stdio.h>
+
+int main()
+{
+int i,n,x,k=0,j;
+scanf("%d %d",&n,&x);
+for(i=1;i<=n;i++)
+{
+j=i;
+while(j)
+{
+if(j%10==x)
+k++;
+j=j/10;
+
+}
+
+}
+printf("%d",k);
+return 0;
+}
+
