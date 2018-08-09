@@ -1,0 +1,31 @@
+#@Author:Tiancong Hua
+#@Date:2018.08.09
+#Location:Southeast University
+
+num_of_num=int(input())#输入数据
+a=input().split()
+a = [ int( a ) for a in a if a ]#强制转化数组中的字符为int
+total=0
+c=[]
+
+#这是本题的精髓所在，利用数组，获得每一个数与其他数相加的结果，形成新的数组
+#注意，由于在之前的叠加过程中，后面一次的求和结果在上一次中已经出现，
+# 因此要去除之前的相同的结果，直接取i+1到最后的结果，并加到新数组中
+#更值得注意的是，题中求的是，其中有多少个数，恰好等于集合中另外两个（不同的）数之和？
+# 而不是有多少种方法使得结果会等于这个数，需看清题意
+#利用set命令的特性，去掉数组中的相同的数，再判断新的数组中是否有结果与原数组相同，相同加一
+for i in range(num_of_num):
+    b=[x+a[i] for x in a]
+    for j in b[i+1:]:
+        if j ==None:
+            break
+        else:
+            c.append(j)
+c=set(c)
+c=list(c)
+
+for i in range(len(a)):
+    for j in range(len(c)):
+        if a[i]==c[j]:
+            total+=1
+print(total)
