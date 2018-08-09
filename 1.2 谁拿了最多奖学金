@@ -1,0 +1,52 @@
+#@Author:Tiancong Hua
+#@Date:2018.8.9
+#@Location:Southeast University
+
+
+#接受键盘的输入信息
+def inputinformation():
+    name,score1,score2,ganbu,xibu,lunwen=input().split()
+
+    score1=int(score1)
+    score2=int(score2)
+    lunwen=int(lunwen)
+    return name,score1,score2,ganbu,xibu,lunwen
+
+#计算获得奖学金的多少
+def money(score1,score2,ganbu,xibu,lunwen):
+    money=0
+    if score1>80 and lunwen>=1:
+        money+=8000
+    if score1>85 and score2>80:
+        money+=4000
+    if score1>90:
+        money+=2000
+    if score1>85 and xibu==str('Y'):
+        money+=1000
+    if score2>80 and ganbu==str('Y'):
+        money+=850
+    return money
+
+numofstd=int(input())
+tmpinf=[]
+tmpmoney=[]
+total_money=0
+
+for i in range(numofstd):
+    name, score1, score2, ganbu, xibu, lunwen = inputinformation()
+    moneyk=money(score1, score2, ganbu, xibu, lunwen)
+    tmpinf.append([name, score1, score2, ganbu, xibu, lunwen,moneyk])
+    tmpmoney.append(moneyk)
+    total_money+=moneyk
+tmpmoney=sorted(tmpmoney)
+
+#题中要求，当同时有好几个人奖学金的数量相同，取第一个人的名字输出
+#解决方案：先将每个人的奖学金排序，然后找到最大的金额，判断最大的金额的位置，输出第一个学生的名字
+#由于后面的同学不考虑，所以直接break
+for i in range(numofstd):
+    if tmpinf[i][-1]==tmpmoney[-1]:
+        print(tmpinf[i][0])
+        break
+
+print(tmpmoney[-1])
+print(total_money)
