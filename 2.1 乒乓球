@@ -1,0 +1,63 @@
+#@Author:Tiancong Hua
+#@Date:2018.08.09
+#Location:Southeast University
+
+
+
+b=[]
+c=[]
+T=True
+
+#获取输入的数据
+while T:
+    a=input()
+    b+=a
+
+    for t in a:
+        if t=='E':
+            T=False
+            
+#排除E之后的干扰
+for t in b:
+    c+=t
+    if t=='E':
+        break
+
+def printout(threshold):
+    W=0
+    L=0
+    xinkai=False
+    for i in range(len(c)):
+        if c[i]=='W':
+            W+=1
+        elif c[i]=='L':
+            L+=1
+
+        if W>=threshold and W>L+1:
+            print('%d:%d' % (W, L))
+            if W>threshold and W==L+2:#最关键的地方,如果正好在E出现的时候，上一局正好结束，此时应该输出0:0,否则不会通过
+                xinkai=True
+            W = 0
+            L = 0
+
+        elif L>=threshold and L>W+1:
+            print('%d:%d' % (W, L))
+            if L > threshold and L == W + 2:
+                xinkai = True
+            W = 0
+            L = 0
+
+    if xinkai == False:#考虑到存在没打完一局的情况，应该输出当前的比分
+        print('%d:%d\n' % (W, L))
+
+    if xinkai == True:#为了保证能输出0 ：0
+        print('%d:%d\n' % (W, L))
+
+
+printout(11)
+printout(21)
+
+
+
+
+
