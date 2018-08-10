@@ -1,0 +1,40 @@
+#@Author:Tiancong Hua
+#@Date:2018.08.09
+#@Location:Southeast University
+
+
+a=int(input())
+b=input()
+c=input()
+d=input()
+B = b[::-1]
+C=c[::-1]
+
+
+def judge(b,c,d):
+    B = b[::-1]
+    Flag=True
+    for i in range(a):
+        #这句话是本题的精髓所在，由于26个字母总是循环的，
+        # 因此可以不用考虑是否超过范围的问题，
+        # 直接相减并判断是否是26的倍数，则可以断定是否符合要求
+        if ((ord(c[i])-ord('a')+ord(d[i])-ord('a'))-2*(ord(B[i])-ord('a')))%26!=0:
+            Flag=False
+            break
+    if Flag==True:
+        print(B)
+
+if b!=c!=d:#当出现类似b:aba,c:aba,d:aba这样的情况的时候，
+    # 连续判断会连续输出三个结果，这不是我们想要的结果
+    judge(b,c,d)
+    judge(c,b,d)
+    judge(d,c,b)
+elif (b==c or b==d or b==c==d):#其中相同的情况直接输出
+    print(B)
+elif (d==c and d!=b):#如果不添加d!=b，当出现b==c==d的情况时，会输出2次，程序无法通过
+        print(C)
+
+
+
+
+
