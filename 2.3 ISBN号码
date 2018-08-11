@@ -1,0 +1,26 @@
+#@Author:Tiancong Hua
+#@Date:2018.08.09
+#@Location:Southeast University
+
+initial_ISBN=input()
+initial_ISBN=list(initial_ISBN)
+
+A=int(initial_ISBN[0])*1+int(initial_ISBN[2])*2+int(initial_ISBN[3])*3+int(initial_ISBN[4])*4+int(initial_ISBN[6])*5+int(initial_ISBN[7])*6+int(initial_ISBN[8])*7+int(initial_ISBN[9])*8+int(initial_ISBN[10])*9
+B=A%11
+if B!=10:
+    if initial_ISBN[-1]==str(B):
+        print('Right')
+    elif initial_ISBN[-1]!=str(B):
+        initial_ISBN[-1]=str(B)
+        news = ''.join(initial_ISBN)
+        print(news)
+
+elif B==10:
+    if initial_ISBN[-1]=='X':
+        print('Right')
+    elif initial_ISBN[-1]!='X':
+        initial_ISBN[-1]='X'
+        news = ''.join(initial_ISBN)
+        print(news)
+#在Python中字符串是不可改变的对象(immutable)，因此无法直接修改字符串的某一位字符。
+
