@@ -1,0 +1,48 @@
+# @Author:Tiancong Hua
+# @Date:2018.08.09
+# @Location:Southeast University
+
+#容易出错的地方：一定是原进制的数与其相同进制的数相加，得到相同进制的数，再做判断是否是回文。如果先转换成10进制或者其他，都会导致报错
+N = int(input())
+A = input()
+
+B = 0
+D=[]
+
+
+#转换输入的数为对应的进制数，为下面的程序带来方便，并且利用了字符串ASCAII码的特性，减少了16进制可能导致的多重判断代码
+for i in range(len(A)):
+    if ord(A[i])>=ord('A'):
+        D.append(ord(A[i])-ord('A')+10)
+    else:
+        D.append(ord(A[i])-ord('0'))
+
+
+#进制计算，返回相同进制的数
+def return_N(D):
+    F = D[::-1]
+    for  i in range(len(D)):
+        D[-(i+1)]=D[-(i+1)]+F[-(i+1)]
+        if D[-(i+1)]>=N and i+2<=len(D):
+             D[-(i+2)]+=1
+             D[-(i+1)] -= N
+        elif i+2>len(D):
+            break
+
+    if D[0]>=N:
+        D[0]-=N
+        D.insert(0,1)
+    return D
+
+step=0
+while True:
+
+    D=return_N(D)
+
+    step+=1
+    if D==D[::-1]:
+        print('STEP=%d'%step)
+        break
+    elif step>30:
+        print('Impossible!')
+        break
