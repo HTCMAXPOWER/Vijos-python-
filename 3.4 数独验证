@@ -1,0 +1,88 @@
+
+#@Author:Tiancong Hua
+#@Date:2018.08.09
+#@Location:Southeast University
+
+
+#这个题其实挺简单的，但是由于python的输入以及list的特性，导致遇到了很多的问题
+#python输入多个数据，不能像C++或C一样，将每个元素送入指定大小的数组中，是python的一大缺点，亦可能是我的水平的原因，没能解决这个问题
+#list无法提取初第一个维度之外的其他维度，只能通过先提取第一个维度，再提取后一个维度
+#判断的时候也可以用集合的特点来判断
+#本题解采用了和与乘积来判断
+
+import itertools
+
+
+val=[]
+N=int(input())
+
+
+def judge(matrix):
+
+    for i in range(9):
+        plus = 0
+        mul = 1
+        for x in matrix[i]:
+            plus+=int(x)
+            mul*=int(x)
+
+        if plus==45 and mul==362880:
+            P1=True
+
+        else:
+            P1=False
+            break
+
+    for j in range(9):
+        plus = 0
+        mul = 1
+        for x in matrix:
+            plus+=int(x[j])
+            mul*=int(x[j])
+
+        if plus==45 and mul==362880:
+            P2=True
+        else:
+            P2=False
+            break
+
+    for c in (0, 3, 6):
+        for r in (0, 3, 6):
+            plus = 0
+            mul = 1
+            cur_vals = [maxtrix[i][j] for (i, j) in itertools.product(range(c, c + 3), range(r, r + 3))]
+
+            for x in cur_vals:
+                plus += int(x)
+                mul *= int(x)
+
+            if plus==45 and mul==362880:
+                    P3=True
+            else:
+                    P3=False
+                    break
+
+    if P1==P2==P3==True:
+        print('Right')
+    else:
+        print('Wrong')
+
+
+for i in range(N):
+    if i >0:
+        for j in range(10):
+            cur_line = input().split()
+            if cur_line != [ ]:
+                val.append(cur_line)
+    else:
+        for j in range(9):
+            cur_line = input().split()
+            val.append(cur_line)
+
+
+
+
+
+for  i in range(N):
+    maxtrix=val[0+9*i:9+9*i]
+    judge(maxtrix)
