@@ -1,0 +1,23 @@
+#@Author:Tiancong Hua
+#@Date:2018.08.09
+#@Location:Southeast University
+
+import bisect
+
+
+#贪心算法
+#每次找到最少的体力，进行合并，需要注意的是，前面生成的堆应该再次插入并排序，因为这个堆在后面也需要参与体力的消耗
+#学到的知识：
+#二分查找，直接插入找到的数据，肯定比push插入后再排序要好！
+#之前一直超时
+
+num=int(input())
+num_of_class=list(map(int,input().split()))
+num_of_class.sort()
+s=0
+while len(num_of_class)>1:
+    x=num_of_class.pop(0)+num_of_class.pop(0)
+    bisect.insort(num_of_class,x)
+    s=s+x
+
+print(s)
