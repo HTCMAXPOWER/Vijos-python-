@@ -1,0 +1,35 @@
+N=int(input())
+
+A=list(map(int,input().split()))
+M=0
+for i in range(N):
+    M+=A[i]
+
+M=M/N
+
+
+ans=0
+
+for i in range(N):
+    if A[i]>M:
+        A[i+1]+=A[i]-M
+        A[i]=M
+        ans+=1
+        #print('>M',A)
+    elif A[i]<M:
+        A[i + 1] -= M - A[i]
+        A[i]=M
+        ans+=1
+        #print('<M', A)
+
+print(ans)
+
+#输入：
+# 4
+# 9 8 17 6
+
+#输出：
+# <M [10.0, 7.0, 17, 6]
+# <M [10.0, 10.0, 14.0, 6]
+# >M [10.0, 10.0, 10.0, 10.0]
+# 3
