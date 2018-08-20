@@ -1,0 +1,23 @@
+#@Author:Tiancong Hua
+#@Date:2018.08.09
+#@Location:Southeast University
+
+N=int(input())
+A=[]
+B=[]
+for i in range(N):
+    A.append(list(map(int,input().split())))
+for i in range(N):
+    B.append(A[i][1])
+
+B.sort()
+C=int(N/2)
+pos=B[C]
+result=0
+for i in range(0,N):
+    result+=abs(B[i]-pos)
+print(result)
+
+#由于题中简化了难度，设定了输油管道沿最短路径(或南或北)与主管道相连，因此，原先的x轴坐标不再有效，
+# 只需要y轴的信息，求出其中位数，便可使其中的某些输油管道的长度为0，
+# 此时其他店到主管道的距离也是最短。若是题中求的是欧氏距离，题目难度会大很多。
