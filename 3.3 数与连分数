@@ -1,0 +1,33 @@
+import re
+
+def Fraction(values):
+    numerator=1
+    denominator=0
+    for x in reversed(values):
+        numerator,denominator=denominator,numerator#分子，分母
+        numerator+=denominator*x
+
+    return  '%d/%d'%(numerator,denominator) if denominator>1 else numerator
+def to_continued(numerator, denominator):
+    res_str="[%d;"%(numerator/denominator)
+    numerator%=denominator
+    if numerator==0:
+        return res_str.replace(';',']')#替换
+    while numerator>0:
+        numerator,denominator=denominator,numerator
+        res_str+='%d'%(numerator/denominator)
+        numerator%=denominator
+        res_str+=','
+    return res_str.rstrip(',')+']'#.rstrip删除 string 字符串末尾的指定字符
+
+while True:
+    try:
+        line=input()
+
+        if line[0]=='[':
+            print(Fraction(list(map(int, re.findall(r'\d+', line)))))
+        else:
+            print(to_continued(*map(int, re.findall(r'\d+', line))))
+    except EOFError:
+        break
+
