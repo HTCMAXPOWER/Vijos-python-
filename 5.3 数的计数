@@ -1,0 +1,13 @@
+A=int(input())
+
+list=[]
+for i in range(A+1):
+    list.append(1)
+
+#这道题利用了递归的操作，首先去A的二分之一，然后递归得到那些数的1/2，累计叠加，可得到结果
+for j in range(1,A+1):
+    for k in range(int(j/2)):
+        list[j]+=list[k+1]
+
+
+print(list[-1])
