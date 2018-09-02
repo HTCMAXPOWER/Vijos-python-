@@ -1,0 +1,11 @@
+#这题简单到不想解释
+num=int(input())
+students=list(map(int,input().split()))
+
+list=list(set(students))
+list.sort()
+print(list.__len__())
+for i in range(len(list)):
+    print(list[i],end= ' ')
+
+
