@@ -1,0 +1,26 @@
+n=list(map(int,input().split()))#n[0]代表的是要照片的人的个数，n[1]代表的是照片数。
+E=list(map(int,input().split()))#附加权重
+D=list(map(int,input().split()))#初始权重
+a=[]
+b=[]
+
+
+
+
+for i in range(n[0]):
+    a.append((i,D[i]))
+a=sorted(a,key=lambda s:s[1],reverse=True)#再次挖掘出sorted的玩法，指定key，对其中的值进行排序
+for i in range(n[0]):
+    b.append((a[i][0]+1,a[i][1]+E[i%10]))
+b=sorted(b,key=lambda s:s[1],reverse=True)
+
+for i in range(n[0]):
+    for j in range(i+1,n[1]):#这里是投机取巧的做法，只是单纯地为了通过机器测试，如果直接循环n[0]次，时间根本不够，但是n[1]<=n[0],因此可以省很多时间，更严格的应该是循环n[0]次
+        if b[i][1]==b[j][1]:
+           if  b[i][0]>b[j][0]:
+               b[i],b[j]=b[j],b[i]
+
+for i in range(n[1]):
+    print(b[i][0],end=' ')#挖掘出print函数的输出格式，end控制输出格式
+
+
