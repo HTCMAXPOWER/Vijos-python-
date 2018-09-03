@@ -1,0 +1,13 @@
+
+maxmin = list(map(int, input().split()))
+
+def gcd(x, y):#强，求最大公约数，简单几句话，利用函数调用本身，获得最大公约数，这几句代码实在太强了，在下佩服
+    if y==0:return x
+    return gcd(y,x%y)
+
+ans=0
+for i in range(maxmin[0],maxmin[1]+1,maxmin[0]):
+    for j in range(maxmin[0],maxmin[1]+1,maxmin[0]):
+        if gcd(i,j)==maxmin[0] and (i//maxmin[0])*(j//maxmin[0])*maxmin[0]==maxmin[1]:
+            ans+=1
+print(ans)
